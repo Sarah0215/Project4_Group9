@@ -1,0 +1,179 @@
+:root {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --header-background: #4682B4;
+    --navbar-background: #333333;
+    --footer-background: #333333;
+    --link-color: #4682B4;
+    --link-hover-background: #575757;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.custom-header {
+    background-color: var(--header-background);
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.custom-header h1 {
+    margin: 0;
+}
+
+.custom-header button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: var(--header-background);
+    border: none;
+    cursor: pointer;
+}
+
+.custom-header button:hover {
+    background-color: #dddddd;
+}
+
+.navbar {
+    background-color: var(--navbar-background);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    color: white;
+    padding: 14px 20px;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin: 0 15px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+}
+
+.nav-link:hover {
+    background-color: var(--link-hover-background);
+    border-radius: 5px;
+}
+
+.container {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    flex-grow: 1; /* Allow container to grow and fill available space */
+}
+
+main h2 {
+    margin-top: 0;
+}
+
+form {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px 20px; /* 10px row gap, 20px column gap */
+    justify-content: center;
+    align-items: center;
+}
+
+form label {
+    text-align: right;
+    margin-right: 10px;
+}
+
+form input {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+form button {
+    grid-column: span 2;
+    margin: 20px 0; /* Add space above and below the button */
+}
+
+#prediction-result {
+    margin-top: 20px; /* Add space between the button and the prediction result */
+}
+
+section + section {
+    margin-top: 40px; /* Add space between sections */
+}
+
+section p {
+    max-width: 800px; /* Limit the width of the paragraphs */
+    margin: 0 auto; /* Center the paragraphs */
+}
+
+footer {
+    background-color: var(--footer-background);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #333;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --header-background: #333333;
+    --navbar-background: #1c1c1c;
+    --footer-background: #1c1c1c;
+    --link-color: #bb86fc;
+    --link-hover-background: #575757;
+}
+
+body.dark-mode .custom-header button {
+    background-color: #333333;
+    color: white;
+}
+
+body.dark-mode .custom-header button:hover {
+    background-color: #444444;
+}
