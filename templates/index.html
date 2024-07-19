@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildfire Containment Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="custom-header">
+        <h1>California Wildfire Containment Prediction</h1>
+        <button id="toggle-dark-mode">Dark Mode</button>
+    </header>
+    <nav class="navbar">
+        <!-- <div class="navbar-brand">Wildfire Project</div> -->
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#data">Data</a></li>
+            <li class="nav-item"><a class="nav-link" href="#results">Results</a></li>
+            <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <section id="home">
+            <h2>Wildfire Containment Prediction</h2>
+            <form action="/predict" method="post" id="prediction-form">
+                <label for="alarm-date">Alarm Date:</label>
+                <input type="date" id="alarm-date" name="Alarm Date" required>
+                <!-- <label for="location">Location:</label>
+                <input type="text" id="location" name="Location" required> -->
+                <label for="cause">Cause:</label>
+                <input type="text" id="cause" name="Cause" required>
+                <label for="agency">Agency:</label>
+                <input type="text" id="agency" name="Agency" required>
+                <label for="acres">Acres:</label>
+                <input type="number" id="acres" name="GIS Calculated Acres" required>
+                <button type="submit">Predict</button>
+            </form>
+            <div class="spinner" id="loading-spinner"></div>
+            <div id="prediction-result"></div>
+        </section>
+        <section id="about">
+            <h2>About the Project</h2>
+            <p>The goal of this project is to develop a machine learning model that can predict the containment date of wildfires in California. 
+                Accurate predictions of containment dates can help improve response times and allocate resources more effectively, ultimately reducing the impact of wildfires.
+            </p>
+        </section>
+        <section id="data">
+            <h2>Data</h2>
+            <p>We are using the California Fire Perimeters dataset, which contains information about wildfires in California.</p>
+        </section>
+        <section id="results">
+            <h2>Results</h2>
+            <p>Talk about machine learning model accuracy here.</p>
+        </section>
+        <section id="resources">
+            <h2>Resources</h2>
+            <p>Access the original dataset <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436" target="_blank">here</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Project 4 Group 9 Members: Arman Bains, Alyssa Chand, Divya Jindal, Aram Keledjian, Sakurako Kikuchi, and Palash Raval.</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
