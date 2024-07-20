@@ -11,7 +11,9 @@ Fire Perimeter Dataset: This dataset includes information about the perimeter of
 Incident Dataset: This dataset contains details about fire incidents, including incident name, date created, administrative unit, location, acres burned, containment status, latitude, longitude, and more.
 
 ## Instruction
-1. 
+1. $ python app.py
+2. visit app at:5000
+3. Change input values and click submit. 
 
 ## Visualization 
 
