@@ -21,11 +21,24 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
     .then(data => {
         // Hide the spinner
         spinner.style.display = 'none';
-        predictionResult.innerText = `Prediction: ${data.prediction}`;
+        
+        // Create an explanation text based on the prediction
+        let explanation;
+        if (data.prediction === 'short') {
+            explanation = "Short: Containment within 24 hours.";
+        } else if (data.prediction === 'medium') {
+            explanation = "Medium: Containment between 24 to 72 hours.";
+        } else if (data.prediction === 'long') {
+            explanation = "Long: Containment taking more than 72 hours.";
+        }
+        
+        // Display the prediction and explanation
+        predictionResult.innerHTML = `Prediction: ${data.prediction} <br> ${explanation}`;
     })
     .catch(error => {
         // Hide the spinner
         spinner.style.display = 'none';
         console.error('Error:', error);
+        predictionResult.innerText = 'An error occurred. Please try again.';
     });
 });
