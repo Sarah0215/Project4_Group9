@@ -20,6 +20,11 @@ body {
     color: var(--text-color);
 }
 
+.about-paragraph {
+    margin-bottom: 20px;
+}
+
+
 .custom-header {
     background-color: var(--header-background);
     color: white;
