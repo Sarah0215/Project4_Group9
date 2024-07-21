@@ -12,7 +12,6 @@
         <button id="toggle-dark-mode">Dark Mode</button>
     </header>
     <nav class="navbar">
-        <!-- <div class="navbar-brand">Wildfire Project</div> -->
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
@@ -24,26 +23,48 @@
     <main class="container">
         <section id="home">
             <h2>Wildfire Containment Prediction</h2>
-            <form action="/predict" method="post" id="prediction-form">
-                <label for="alarm-date">Alarm Date:</label>
-                <input type="date" id="alarm-date" name="Alarm Date" required>
-                <!-- <label for="location">Location:</label>
-                <input type="text" id="location" name="Location" required> -->
-                <label for="cause">Cause:</label>
-                <input type="text" id="cause" name="Cause" required>
-                <label for="agency">Agency:</label>
-                <input type="text" id="agency" name="Agency" required>
-                <label for="acres">Acres:</label>
-                <input type="number" id="acres" name="GIS Calculated Acres" required>
+            <form id="prediction-form">
+                <label for="alarm-date">Incident Date Created:</label>
+                <input type="date" id="alarm-date" name="incident_date_created" required>
+                
+                <label for="extinguish-date">Incident Date Extinguished:</label>
+                <input type="date" id="extinguish-date" name="incident_date_extinguished" required>
+
+                <label for="acres">Acres Burned:</label>
+                <input type="number" id="acres" name="incident_acres_burned" required>
+
+                <label for="population">County Population:</label>
+                <input type="number" id="population" name="county_population" required>
+
+                <label for="temperature">Mean Temperature:</label>
+                <input type="number" step="0.1" id="temperature" name="mean_temperature" required>
+
+                <label for="county">County:</label>
+                <select id="county" name="incident_county" required>
+                    <option value="">Select a county</option>
+                    {% for county in counties %}
+                    <option value="{{ county }}">{{ county }}</option>
+                    {% endfor %}
+                </select>
+                
                 <button type="submit">Predict</button>
             </form>
-            <div class="spinner" id="loading-spinner"></div>
+            <div class="spinner" id="loading-spinner" style="display: none;">Loading...</div>
             <div id="prediction-result"></div>
         </section>
         <section id="about">
             <h2>About the Project</h2>
-            <p>The goal of this project is to develop a machine learning model that can predict the containment date of wildfires in California. 
-                Accurate predictions of containment dates can help improve response times and allocate resources more effectively, ultimately reducing the impact of wildfires.
+            <p class="about-paragraph">The goal of this project is to develop a machine learning model that can predict the containment time of wildfires in California. 
+                Accurate predictions of containment times can help improve response times and allocate resources more effectively, ultimately reducing the impact of wildfires.
+            </p>
+            <p class="about-paragraph">This project utilizes data from various sources including wildfire incidents, county population statistics, and temperature records. 
+                The key features used in the model include the date the wildfire started, the date it was contained, the acres burned, 
+                the population of the county where the wildfire occurred, and the average temperature during the incident.
+            </p>
+            <p class="about-paragraph">Wildfires pose a significant threat to both the environment and human lives. 
+                Enhancing our ability to predict containment times not only aids in better preparedness and resource allocation but also contributes to the overall safety 
+                and well-being of affected communities. This project aims to provide a valuable tool for wildfire management agencies and emergency responders in their efforts
+                 to combat wildfires more effectively.
             </p>
         </section>
         <section id="data">
@@ -52,7 +73,17 @@
         </section>
         <section id="results">
             <h2>Results</h2>
-            <p>Talk about machine learning model accuracy here.</p>
+            <p>The machine learning model developed for predicting wildfire containment times has demonstrated a reasonable accuracy in its predictions. 
+                The model classifies the containment time into three categories: short (contained within 24 hours), medium (contained within 24-72 hours), 
+                and long (contained after 72 hours). Below are the key performance metrics of the model:
+            </p>
+            <ul>
+                <li><strong>Accuracy:</strong> 75%</li>
+                <li><strong>Precision:</strong> Short: 62%, Medium: 48%, Long: 85%</li>
+                <li><strong>Recall:</strong> Short: 57%, Medium: 44%, Long: 89%</li>
+                <li><strong>F1-Score:</strong> Short: 59%, Medium: 46%, Long: 87%</li>
+            </ul>
+            <p>The model's cross-validated accuracy is 77% with a standard deviation of 1%, indicating that the model's performance is consistent across different subsets of the data.</p>
         </section>
         <section id="resources">
             <h2>Resources</h2>
