@@ -9,10 +9,10 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 # Load the pre-trained model
-model = joblib.load('cawildfire_random_forest_model.pkl')
+model = joblib.load('spark_cawildfire_random_forest_model.pkl')
 
 # Load the wildfire data to get county names and coordinates
-wildfire_data = pd.read_csv('cawildfire_percent75_data.csv')
+wildfire_data = pd.read_csv('spark_cawildfire_percent75_data.csv')
 
 # Extract unique county names and their coordinates
 county_coordinates = wildfire_data[['incident_county', 'incident_latitude', 'incident_longitude']].drop_duplicates()
