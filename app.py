@@ -53,6 +53,23 @@ def predict():
         logging.error(f"Error occurred: {e}")
         return jsonify({'error': 'An error occurred. Please try again.'}), 500
 
+@app.route('/chatbot', methods=['POST'])
+def chatbot():
+    user_message = request.json.get('message')
+    bot_response = generate_bot_response(user_message)
+    return jsonify({'response': bot_response})
+
+def generate_bot_response(user_message):
+    responses = {
+        "hello": "Hello! How can I help you with the wildfire containment prediction tool?",
+        "hi": "Hi there! How can I assist you today?",
+        "how do i use this": "You can use this tool by entering the incident details and clicking on 'Predict' to see the containment time.",
+        "help": "Sure, I am here to help. Please provide your question.",
+        "default": "I'm not sure how to help with that. Please ask something else."
+    }
+    return responses.get(user_message.lower(), responses["default"])
+
+
 def preprocess(data):
     data['incident_date_created'] = pd.to_datetime(data['incident_date_created'])
     data['incident_date_extinguished'] = pd.to_datetime(data['incident_date_extinguished'])
