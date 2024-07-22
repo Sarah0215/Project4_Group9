@@ -42,3 +42,82 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
         predictionResult.innerText = 'An error occurred. Please try again.';
     });
 });
+
+
+// Chatbot handling
+document.addEventListener('DOMContentLoaded', function () {
+    const openChatbotBtn = document.getElementById('open-chatbot');
+    const closeChatbotBtn = document.querySelector('.close-chatbot');
+    const chatbotContainer = document.querySelector('.chatbot-container');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatLogs = document.getElementById('chatlogs');
+
+    openChatbotBtn.addEventListener('click', function () {
+        chatbotContainer.style.display = 'block';
+    });
+
+    closeChatbotBtn.addEventListener('click', function () {
+        chatbotContainer.style.display = 'none';
+    });
+
+    sendBtn.addEventListener('click', function () {
+        const message = chatInput.value.trim();
+        if (message) {
+            appendChatMessage('User', message);
+            chatInput.value = '';
+            fetchResponse(message);
+        }
+    });
+
+    chatInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            const message = chatInput.value.trim();
+            if (message) {
+                appendChatMessage('User', message);
+                chatInput.value = '';
+                fetchResponse(message);
+            }
+        }
+    });
+
+    function fetchResponse(message) {
+        const lowerCaseMessage = message.toLowerCase().replace(/[?!.]$/, ''); // Remove trailing punctuation
+        fetch('/chatbot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: lowerCaseMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.response) {
+                appendChatMessage('Bot', data.response);
+            } else {
+                appendChatMessage('Bot', 'An error occurred. Please try again.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            appendChatMessage('Bot', 'An error occurred. Please try again.');
+        });
+    }
+    
+
+    function appendChatMessage(sender, message) {
+        const chatMessage = document.createElement('div');
+        chatMessage.className = sender === 'User' ? 'user-message' : 'bot-message';
+        chatMessage.textContent = message;
+        chatLogs.appendChild(chatMessage);
+        chatLogs.scrollTop = chatLogs.scrollHeight;
+    }
+});
+
+
+
+
+
+
+
+
