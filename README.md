@@ -49,9 +49,56 @@ The model performs well for predicting long containment times but shows room for
 The project successfully meets the requirement of achieving at least 75% classification accuracy and utilizes data retrieved via Spark. The model provides valuable insights into wildfire containment times, which can aid in better preparedness and resource allocation. Future improvements can further enhance the model's accuracy and reliability, making it an even more powerful tool for wildfire management.
 
 ## Instruction
-1. $ python app.py
-2. visit app at:5000
-3. Change input values and click submit. 
+1. Run the application: python app.py
+2. Visit the application at: http://localhost:5000
+3. Change input values and click "Predict" to get the containment time prediction.
+
+## Webpage and Chatbot
+
+![image](https://github.com/user-attachments/assets/5a63d28a-89a1-4bf7-971b-687ab4802fbc)
+
+### Webpage Overview
+The "California Wildfire Containment Prediction" webpage is designed to help users predict the containment time of wildfires based on various input parameters. This tool leverages a machine learning model trained on historical wildfire data, including incident details, county population statistics, and temperature data.
+
+### How to Use the Webpage
+1. Incident Date Created: Enter the date when the wildfire started.
+2. Incident Date Extinguished: Enter the date when the wildfire was extinguished.
+3. Acres Burned: Input the total number of acres burned by the wildfire.
+4. County Population: Provide the population of the county where the wildfire occurred.
+5. Mean Temperature: Enter the average temperature during the incident.
+6. County: Select the county where the wildfire took place from the dropdown menu.
+
+Once all the fields are filled out, click the "Predict" button to generate a prediction for the wildfire containment time. The prediction will categorize the containment time into one of three classes:
+
+- Short: Containment within 24 hours.
+- Medium: Containment between 24 and 72 hours.
+- Long: Containment taking more than 72 hours.
+
+### Chatbot Functionality
+The webpage includes an interactive chatbot designed to assist users with their inquiries related to the wildfire containment prediction tool. The chatbot can respond to common questions and provide guidance on using the tool effectively.
+
+#### How to Use the Chatbot
+- "hello": The chatbot will greet the user and offer assistance.
+   - Response: "Hello! How can I help you with the wildfire containment prediction tool?"
+
+- "hi": Another greeting option.
+   - Response: "Hi there! How can I assist you today?"
+
+- "how do i use this": Guidance on using the prediction tool.
+   - Response: "You can use this tool by entering the incident details and clicking on 'Predict' to see the containment time."
+
+- "help": General help request.
+   - Response: "Sure, I am here to help. Please provide your question."
+
+- Default: For unrecognized inputs.
+   - Response: "I'm not sure how to help with that. Please ask something else."
+
+#### Implementation Details
+The chatbot functionality is implemented using Flask. A POST request is sent to the `/chatbot` endpoint with the user's message, and the server responds with an appropriate message.
+
+![image](https://github.com/user-attachments/assets/70782763-08a3-4933-beda-af6eebf81ba3)
+
+This basic rule-based chatbot serves to enhance user experience by providing instant support and guidance, making the wildfire containment prediction tool more user-friendly and accessible.
 
 ## Visualization 
 
