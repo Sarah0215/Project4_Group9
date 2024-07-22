@@ -48,8 +48,8 @@
                 </select>
                 
                 <button type="submit">Predict</button>
+                <div class="spinner" id="loading-spinner"></div>
             </form>
-            <div class="spinner" id="loading-spinner" style="display: none;">Loading...</div>
             <div id="prediction-result"></div>
         </section>
         <section id="about">
@@ -69,7 +69,9 @@
         </section>
         <section id="data">
             <h2>Data</h2>
-            <p>We are using the California Fire Perimeters dataset, which contains information about wildfires in California.</p>
+            <p>We are using the California Fire Perimeters dataset and California Fire Hazard Severity Zone dataset, which contains information about wildfires in California.
+                Additionally, we have integrated population data from the U.S. Census Bureau and temperature data from the OpenWeather API.
+            </p>
         </section>
         <section id="results">
             <h2>Results</h2>
@@ -87,8 +89,30 @@
         </section>
         <section id="resources">
             <h2>Resources</h2>
-            <p>Access the original dataset <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436" target="_blank">here</a>.</p>
+            <p>Access the California Fire Perimeters dataset <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436" target="_blank">here</a>.</p>
+            <p>Access the California Fire Hazard Severity Zone dataset <a href="https://catalog.data.gov/dataset/california-fire-hazard-severity-zone-viewer-8abb4" target="_blank">here</a>.</p>
         </section>
+
+
+    <!-- Chatbot Button -->
+    <button id="open-chatbot" class="chatbot-button">Chat</button>
+
+    <!-- Chatbot Modal -->
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <h2>Chat with us</h2>
+            <span class="close-chatbot">×</span>
+        </div>
+        <div class="chatbot-body">
+            <div class="chat-logs" id="chatlogs">
+                <!-- Chat messages will be appended here -->
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
     </main>
     <footer>
         <p>&copy; 2024 Project 4 Group 9 Members: Arman Bains, Alyssa Chand, Divya Jindal, Aram Keledjian, Sakurako Kikuchi, and Palash Raval.</p>
