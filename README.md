@@ -101,7 +101,68 @@ The chatbot functionality is implemented using Flask. A POST request is sent to 
 
 This basic rule-based chatbot serves to enhance user experience by providing instant support and guidance, making the wildfire containment prediction tool more user-friendly and accessible.
 
-## Visualization 
+## Exploratory Data Analysis (EDA) for Model Features
+
+### Histograms and Bar Chart
+
+![Screenshot 2024-07-22 194309](https://github.com/user-attachments/assets/0fbc6660-c9f5-4533-955d-973ce0e52bc6)
+
+![image](https://github.com/user-attachments/assets/279908bd-2323-4e1f-ad49-42ffe66b7e08)
+
+![Screenshot 2024-07-22 201010](https://github.com/user-attachments/assets/545407c2-ce75-480f-91e6-060b4b06e545)
+
+
+1. #### Incident Acres Burned:
+   - The majority of wildfires have burned relatively small areas, with a significant concentration below 50,000 acres, although there are some extreme outliers.
+2. #### County Population:
+   - The population distribution of affected counties is skewed towards lower values, suggesting that wildfires predominantly occur in less densely populated regions.
+3. #### Mean Temperature:
+   - The mean temperature data follows a normal distribution centered around 20 degrees Celsius. This suggests that most wildfires occur in areas with moderate temperatures.
+4. #### Incident Latitude and Longitude:
+   - The geographical distribution of wildfires shows clustering in specific latitudinal and longitudinal bands, hinting at regional susceptibility.
+5. #### Day of Year Created and Extinguished:
+   - Temporal analysis reveals that wildfires are more frequent during mid-year and late-year periods, aligning with seasonal weather patterns.
+6. #### Day of Week Created and Extinguished:
+   - The day of the week appears to have little impact on wildfire occurrence or containment.
+7. #### Month Created and Extinguished:
+   - The monthly data highlights peaks during summer and early autumn, consistent with California's wildfire season.
+8. #### Year Created and Extinguished:
+   - An increasing trend in wildfire incidents over recent years underscores the urgency for improved fire management strategies.
+9. #### Containment Time Class:
+   -  The distribution of containment time classes shows that the majority of wildfires fall into the 'long' category, taking more than 72 hours to contain. This highlights the challenges in managing large wildfires, underscoring the importance of resource allocation          and effective response strategies to handle such prolonged incidents.
+  
+These findings emphasize the need for targeted preventive measures and resource allocation to mitigate wildfire impact effectively. Further analyses, such as correlation studies, time series forecasting, and geospatial mapping, could provide deeper insights into wildfire behavior and aid in developing robust predictive models.
+
+### Boxplots
+
+![Screenshot 2024-07-22 202232](https://github.com/user-attachments/assets/0f2d85b5-6a72-42aa-a2d3-2844cc3d2e12)
+
+![Screenshot 2024-07-22 202254](https://github.com/user-attachments/assets/31f43eed-e9cf-4229-b63b-125f3a81d55f)
+
+![Screenshot 2024-07-22 202318](https://github.com/user-attachments/assets/bd2e4f06-ab94-4be4-82e4-af8601506272)
+
+![Screenshot 2024-07-22 202337](https://github.com/user-attachments/assets/53af167b-c042-4d34-bf67-f3fbf93efe2c)
+
+1. #### Incident Acres Burned:
+   - There are a significant number of outliers, indicating that while most wildfires burn relatively fewer acres, some wildfires have extreme values in terms of acres burned.
+2. #### County Population:
+   - The county population values show a right-skewed distribution with a few counties having a very high population, making them outliers.
+3. #### Mean Temperature:
+   - The mean temperature shows a normal distribution, which indicates a balanced spread around the central value. There are some outliers on both ends of the temperature range.
+4. #### Incident Latitude and Longitude:
+   - The values for latitude and longitude are quite concentrated with some extreme outliers. This suggests that most wildfires occur in a specific geographic range, but there are exceptions.
+5. #### Day of Year Created and Extinguished:
+   - The data shows a wide distribution, indicating that wildfires can occur at any time of the year. There are several outliers, particularly for the days near the beginning and end of the year, possibly due to seasonal variations and environmental conditions.
+6. #### Day of Week Created and Extinguished:
+   - Wildfires seem to occur uniformly across the days of the week with no significant outliers, suggesting a consistent pattern without any particular day standing out.
+7. #### Month Created and Extinguished:
+   - The data shows that wildfires are more common during certain months, typically in the summer. Some outliers exist, which might represent unusual events where wildfires occurred outside the typical wildfire season.
+8. #### Year Created and Extinguished:
+   - The data shows an increasing trend of wildfires in recent years, with some outliers in the earlier years.
+9. #### Containment Time:
+   - The containment time shows extreme outliers, indicating that while most containment times are short, a few incidents have taken significantly longer to contain. This could be due to the severity and scale of certain wildfires, requiring more extended efforts for       containment.
+
+Overall, the data visualizations highlight the presence of outliers in several features, indicating that while the majority of wildfires follow a certain trend, there are significant exceptions that deviate from the norm. This information is crucial for understanding the variability in wildfire data and can help in improving the predictive model's accuracy.
 
 ## References
 
