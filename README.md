@@ -107,11 +107,11 @@ This basic rule-based chatbot serves to enhance user experience by providing ins
 
 - Data Sources:
 
-   - [wildfire dataset](https://www.fire.ca.gov/incidents)
+   - [CAL FIRE](https://www.fire.ca.gov/incidents) - Data used for this project.
  
-   - [census api](https://www.census.gov/) - Used to add county population in the dataset.
+   - [U.S. Census Bureau](https://www.census.gov/) - Used to add county population in the dataset.
 
-   - [weather api](https://open-meteo.com/) - Used to add mean temperature in the dataset.
+   - [Open-Meteo](https://open-meteo.com/) - Used to add mean temperature in the dataset.
 
 - Code References:
   
