@@ -107,11 +107,11 @@ This basic rule-based chatbot serves to enhance user experience by providing ins
 
 - Data Sources:
 
-   - https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436  
-     Fire Perimeter Dataset: This dataset includes information about the perimeter of fires, including attributes like the year, state, agency, fire name, alarm date, containment date, cause, and GIS-calculated acres.(22000 Data rows)
+   - [wildfire dataset](https://www.fire.ca.gov/incidents)
+ 
+   - [census api](https://www.census.gov/) - Used to add county population in the dataset.
 
-   - https://catalog.data.gov/dataset/california-fire-hazard-severity-zone-viewer-8abb4  
-     Incident Dataset: This dataset contains details about fire incidents, including incident name, date created, administrative unit, location, acres burned, containment status, latitude, longitude, and more.
+   - [weather api](https://open-meteo.com/) - Used to add mean temperature in the dataset.
 
 - Code References:
   
