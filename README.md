@@ -6,15 +6,13 @@ The goal of this project is to develop a machine learning model to predict the c
 
 ## Data Preprocessing
 
-### Data Sources
- - https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436  
-Fire Perimeter Dataset: This dataset includes information about the perimeter of fires, including attributes like the year, state, agency, fire name, alarm date, containment date, cause, and GIS-calculated acres.(22000 Data rows)
- - https://catalog.data.gov/dataset/california-fire-hazard-severity-zone-viewer-8abb4  
-Incident Dataset: This dataset contains details about fire incidents, including incident name, date created, administrative unit, location, acres burned, containment status, latitude, longitude, and more.
-
 ### Key Preprocessing Steps
 
 - Merging Datasets: Combined population, wildfire, and temperature data based on relevant keys.
+   - Files Used:
+      - `california_population_by_county.csv`
+      - `map_data_final.csv`
+      - `temperature_map_data.csv`
 - Date Conversion: Converted incident start and end dates to datetime format and calculated the containment time in hours.
 - Feature Engineering: Extracted additional temporal features such as day of year, month, and year from the incident dates.
 - Handling Missing Values: Dropped rows with missing values in critical columns to ensure data integrity.
@@ -47,6 +45,9 @@ The model performs well for predicting long containment times but shows room for
 
 ## Conclusion
 The project successfully meets the requirement of achieving at least 75% classification accuracy and utilizes data retrieved via Spark. The model provides valuable insights into wildfire containment times, which can aid in better preparedness and resource allocation. Future improvements can further enhance the model's accuracy and reliability, making it an even more powerful tool for wildfire management.
+
+## Ethical Considerations
+We strive for fairness by using representative data and evaluating the model to detect and mitigate biases. Transparency is maintained by making predictions interpretable and providing thorough documentation of the model development process. We ensure that the model runs efficiently to minimize resource usage, promoting sustainability. These measures ensure that the model remains accurate and responsible.
 
 ## Instruction
 1. Run the application: python app.py
@@ -102,11 +103,22 @@ This basic rule-based chatbot serves to enhance user experience by providing ins
 
 ## Visualization 
 
+## References
 
-## Contributors
-Alyssa Chand - [Alyssa Chand](https://github.com/AlyssaChand) 
-Aram Keledjian - [Aram Keledjian](https://github.com/production23) 
-Arman Bains -  [Arman Bains](https://github.com/bainsA) 
-Divya Jindal - [Divya Jindal](https://github.com/divya-jindal)  
-Palash Raval - [Palash Raval](https://github.com/palraval) 
-Sakurako Kikuchi - [Sakurako Kikuchi](https://github.com/Sarah0215) 
+- Data Sources:
+
+   - https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436  
+     Fire Perimeter Dataset: This dataset includes information about the perimeter of fires, including attributes like the year, state, agency, fire name, alarm date, containment date, cause, and GIS-calculated acres.(22000 Data rows)
+
+   - https://catalog.data.gov/dataset/california-fire-hazard-severity-zone-viewer-8abb4  
+     Incident Dataset: This dataset contains details about fire incidents, including incident name, date created, administrative unit, location, acres burned, containment status, latitude, longitude, and more.
+
+- Code References:
+  
+  - [pandas Documentation](https://pandas.pydata.org/docs/) — Used for data manipulation, cleaning, and saving it to a CSV file.
+  - [scikit-learn Documentation](https://scikit-learn.org/stable/user_guide.html) — Used for implementing machine learning models, metrics, and preprocessing techniques.
+  - [Google](https://www.google.com/) — Used as a search tool to find relevant references and troubleshoot coding issues.
+  - [BCS](https://bootcampspot.com/) — Watching cloud recordings, using instructor activity solutions, class activities, and past challenges as references.
+  - [ChatGPT](https://www.openai.com/chatgpt) — Used for code assistance and guidance.
+   
+> #### Contributors: [Alyssa Chand](https://github.com/AlyssaChand), [Aram Keledjian](https://github.com/production23), [Arman Bains](https://github.com/bainsA), [Divya Jindal](https://github.com/divya-jindal), [Palash Raval](https://github.com/palraval) and [Sakurako Kikuchi](https://github.com/Sarah0215) 
