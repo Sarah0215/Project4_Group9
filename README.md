@@ -118,7 +118,7 @@ This basic rule-based chatbot serves to enhance user experience by providing ins
   - [pandas Documentation](https://pandas.pydata.org/docs/) — Used for data manipulation, cleaning, and saving it to a CSV file.
   - [scikit-learn Documentation](https://scikit-learn.org/stable/user_guide.html) — Used for implementing machine learning models, metrics, and preprocessing techniques.
   - [Google](https://www.google.com/) — Used as a search tool to find relevant references and troubleshoot coding issues.
-  - [BCS](bootcampspot.instructure.com) — Watching cloud recordings, using instructor activity solutions, class activities, and past challenges as references.
+  - [BCS](https://idp.bootcampspot.com/ui/?requestId=13a338c2-c7bd-4162-ba4c-55c8384afbd5) — Watching cloud recordings, using instructor activity solutions, class activities, and past challenges as references.
   - [ChatGPT](https://www.openai.com/chatgpt) — Used for code assistance and guidance.
    
 > #### Contributors: [Alyssa Chand](https://github.com/AlyssaChand), [Aram Keledjian](https://github.com/production23), [Arman Bains](https://github.com/bainsA), [Divya Jindal](https://github.com/divya-jindal), [Palash Raval](https://github.com/palraval) and [Sakurako Kikuchi](https://github.com/Sarah0215) 
