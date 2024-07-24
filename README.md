@@ -41,7 +41,8 @@ The model was evaluated using various metrics including precision, recall, and F
 - Long Containment Time: Precision = 0.87, Recall = 0.89, F1-score = 0.88
 
 ## Insights and Improvements
-The model performs well for predicting long containment times but shows room for improvement in predicting short and medium containment times. This discrepancy could be due to class imbalance or overlapping feature distributions between classes.
+
+The wildfire containment prediction model faces several flaws: class imbalance biases predictions towards long containment times, and the feature set is limited, missing factors like vegetation type and resource availability. The model's complexity could be improved with advanced techniques like gradient boosting. Data quality, especially for weather and air quality, is crucial, as inaccuracies affect predictions. The model also lacks transparency in its decision-making process. Addressing these issues through balanced class weights, expanded features, high-quality data, and methods for transparency like SHAP can enhance its accuracy and reliability.
 
 ## Conclusion
 The project successfully meets the requirement of achieving at least 75% classification accuracy and utilizes data retrieved via Spark. The model provides valuable insights into wildfire containment times, which can aid in better preparedness and resource allocation. Future improvements can further enhance the model's accuracy and reliability, making it an even more powerful tool for wildfire management.
@@ -56,7 +57,7 @@ We strive for fairness by using representative data and evaluating the model to 
 
 ## Webpage and Chatbot
 
-![image](https://github.com/user-attachments/assets/5a63d28a-89a1-4bf7-971b-687ab4802fbc)
+![image](https://github.com/user-attachments/assets/72112bf6-0e7e-4143-ab93-48daddebec35)
 
 ### Webpage Overview
 The "California Wildfire Containment Prediction" webpage is designed to help users predict the containment time of wildfires based on various input parameters. This tool leverages a machine learning model trained on historical wildfire data, including incident details, county population statistics, and temperature data.
@@ -91,13 +92,18 @@ The webpage includes an interactive chatbot designed to assist users with their 
 - "help": General help request.
    - Response: "Sure, I am here to help. Please provide your question."
 
+- "what is wildfire": Definition of wildfire.
+   - Response: "A wildfire is an unplanned fire that burns in a natural area such as a forest, grassland, or prairie."
+
 - Default: For unrecognized inputs.
    - Response: "I'm not sure how to help with that. Please ask something else."
 
 #### Implementation Details
 The chatbot functionality is implemented using Flask. A POST request is sent to the `/chatbot` endpoint with the user's message, and the server responds with an appropriate message.
 
-![image](https://github.com/user-attachments/assets/70782763-08a3-4933-beda-af6eebf81ba3)
+![image](https://github.com/user-attachments/assets/d721f0da-159b-4c24-a00f-534bae05186f)
+
+![image](https://github.com/user-attachments/assets/fb641dd9-d4a2-4940-aa2d-937cd8edaf5d)
 
 This basic rule-based chatbot serves to enhance user experience by providing instant support and guidance, making the wildfire containment prediction tool more user-friendly and accessible.
 
