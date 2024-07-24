@@ -24,7 +24,6 @@ body {
     margin-bottom: 20px;
 }
 
-
 .custom-header {
     background-color: var(--header-background);
     color: white;
@@ -126,6 +125,39 @@ form button {
     margin-top: 20px; /* Add space between the button and the prediction result */
 }
 
+.map-container {
+    display: flex;
+    height: 500px;
+    margin-top: 20px;
+}
+
+#fire-list {
+    width: 30%;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+}
+
+#fire-list .fire-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+#fire-list .fire-item:hover {
+    background-color: #f0f0f0;
+}
+
+.sidebar {
+    width: 30%;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+#map {
+    flex-grow: 1;
+}
+
 section + section {
     margin-top: 40px; /* Add space between sections */
 }
@@ -179,8 +211,13 @@ body.dark-mode .custom-header button {
     color: white;
 }
 
-body.dark-mode .custom-header button:hover {
-    background-color: #444444;
+body.dark-mode .fire-item {
+    color: #ffffff;
+    border-bottom-color: #444;
+}
+
+body.dark-mode .fire-item:hover {
+    background-color: #444;
 }
 
 /* Chatbot styles */
@@ -275,6 +312,7 @@ body.dark-mode .custom-header button:hover {
 .chat-input-container {
     display: flex;
     gap: 5px;
+    position: relative;
 } 
 
 .chat-input-container input {
@@ -293,8 +331,28 @@ body.dark-mode .custom-header button:hover {
     cursor: pointer;
 }
 
- .chat-input-container button:hover {
+.chat-input-container button:hover {
     background-color: #0056b3;
+}
+
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    z-index: 1000;
+}
+
+.suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: #f0f0f0;
 }
 
 /* Dark Mode for Chatbot */
@@ -330,4 +388,9 @@ body.dark-mode .chat-input-container button {
 
 body.dark-mode .chat-input-container button:hover {
     background-color: #444444;
+}
+
+body.dark-mode .suggestion {
+    background-color: #333; /* Dark background */
+    color: #fff; /* Light text */
 }
