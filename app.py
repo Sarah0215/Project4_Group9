@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import joblib
 import logging
+import requests
 
 app = Flask(__name__)
 
@@ -29,7 +30,7 @@ def home():
 def predict():
     try:
         data = request.form.to_dict()
-        
+
         # Get latitude and longitude from county name
         county = data['incident_county']
         if county in county_coordinates:
@@ -38,7 +39,18 @@ def predict():
         else:
             logging.error(f"Invalid county name: {county}")
             return jsonify({'error': 'Invalid county name'}), 400
-        
+
+        # Add latitude and longitude based on ZIP code
+        if 'zipcode' in data:
+            zip_code = data['zipcode']
+            zip_data = get_lat_lon_from_zip(zip_code)
+            if zip_data:
+                data['incident_latitude'] = zip_data['lat']
+                data['incident_longitude'] = zip_data['lon']
+            else:
+                logging.error(f"Invalid ZIP code: {zip_code}")
+                return jsonify({'error': 'Invalid ZIP code'}), 400
+
         # Preprocess the input data
         processed_data = preprocess(data)
         
@@ -48,7 +60,7 @@ def predict():
         # Convert prediction to human-readable label
         prediction_label = decode_prediction(prediction)
         
-        return jsonify({'prediction': prediction_label})
+        return jsonify({'prediction': prediction_label, 'latitude': data['incident_latitude'], 'longitude': data['incident_longitude']})
     except Exception as e:
         logging.error(f"Error occurred: {e}")
         return jsonify({'error': 'An error occurred. Please try again.'}), 500
@@ -59,16 +71,36 @@ def chatbot():
     bot_response = generate_bot_response(user_message)
     return jsonify({'response': bot_response})
 
+@app.route('/fire-data')
+def fire_data():
+    response = requests.get('https://api.nasa.gov/endpoint?params')  # Replace with the actual API URL
+    data = response.json()
+    return jsonify(data)
+
+def get_lat_lon_from_zip(zip_code):
+    # Replace with actual geocoding API
+    response = requests.get(f'http://api.zippopotam.us/us/{zip_code}')
+    if response.status_code == 200:
+        data = response.json()
+        return {'lat': float(data['places'][0]['latitude']), 'lon': float(data['places'][0]['longitude'])}
+    return None
+
 def generate_bot_response(user_message):
     responses = {
         "hello": "Hello! How can I help you with the wildfire containment prediction tool?",
         "hi": "Hi there! How can I assist you today?",
         "how do i use this": "You can use this tool by entering the incident details and clicking on 'Predict' to see the containment time.",
         "help": "Sure, I am here to help. Please provide your question.",
+        "what is wildfire": "A wildfire is an unplanned fire that burns in a natural area such as a forest, grassland, or prairie.",
+        "what causes wildfires": "Wildfires can be caused by natural factors like lightning or human activities such as campfires, discarded cigarettes, and arson.",
+        "how can i prevent wildfires": "To prevent wildfires, never leave a campfire unattended, avoid burning debris on windy days, and follow local fire regulations.",
+        "what should i do if i see a wildfire": "If you see a wildfire, call 911 immediately. Provide the location and any details you can observe.",
+        "how do i report a wildfire": "You can report a wildfire by calling 911 or your local fire department.",
+        "what is containment time": "Containment time refers to the time it takes to control a wildfire to the point where it no longer spreads.",
+        "what factors affect containment time": "Factors affecting containment time include weather conditions, terrain, fuel type, and available firefighting resources.",
         "default": "I'm not sure how to help with that. Please ask something else."
     }
     return responses.get(user_message.lower(), responses["default"])
-
 
 def preprocess(data):
     data['incident_date_created'] = pd.to_datetime(data['incident_date_created'])
