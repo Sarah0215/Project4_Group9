@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wildfire Containment Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <header class="custom-header">
@@ -23,34 +24,43 @@
     <main class="container">
         <section id="home">
             <h2>Wildfire Containment Prediction</h2>
-            <form id="prediction-form">
-                <label for="alarm-date">Incident Date Created:</label>
-                <input type="date" id="alarm-date" name="incident_date_created" required>
-                
-                <label for="extinguish-date">Incident Date Extinguished:</label>
-                <input type="date" id="extinguish-date" name="incident_date_extinguished" required>
+            <div class="map-container">
+                <div class="sidebar">
+                    <form id="prediction-form">
+                        <label for="alarm-date">Incident Date Created:</label>
+                        <input type="date" id="alarm-date" name="incident_date_created" required>
+                        
+                        <label for="extinguish-date">Incident Date Extinguished:</label>
+                        <input type="date" id="extinguish-date" name="incident_date_extinguished" required>
 
-                <label for="acres">Acres Burned:</label>
-                <input type="number" id="acres" name="incident_acres_burned" required>
+                        <label for="acres">Acres Burned:</label>
+                        <input type="number" id="acres" name="incident_acres_burned" required>
 
-                <label for="population">County Population:</label>
-                <input type="number" id="population" name="county_population" required>
+                        <label for="population">County Population:</label>
+                        <input type="number" id="population" name="county_population" required>
 
-                <label for="temperature">Mean Temperature:</label>
-                <input type="number" step="0.1" id="temperature" name="mean_temperature" required>
+                        <label for="temperature">Mean Temperature:</label>
+                        <input type="number" step="0.1" id="temperature" name="mean_temperature" required>
 
-                <label for="county">County:</label>
-                <select id="county" name="incident_county" required>
-                    <option value="">Select a county</option>
-                    {% for county in counties %}
-                    <option value="{{ county }}">{{ county }}</option>
-                    {% endfor %}
-                </select>
-                
-                <button type="submit">Predict</button>
-                <div class="spinner" id="loading-spinner"></div>
-            </form>
-            <div id="prediction-result"></div>
+                        <label for="zipcode">ZIP Code:</label>
+                        <input type="text" id="zipcode" name="zipcode" required>
+
+                        <label for="county">County:</label>
+                        <select id="county" name="incident_county" required>
+                            <option value="">Select a county</option>
+                            {% for county in counties %}
+                            <option value="{{ county }}">{{ county }}</option>
+                            {% endfor %}
+                        </select>
+                        
+                        <button type="submit">Predict</button>
+                        <div class="spinner" id="loading-spinner"></div>
+                    </form>
+                    <div id="prediction-result"></div>
+                    <div id="fire-list"></div>
+                </div>
+                <div id="map"></div>
+            </div>
         </section>
         <section id="about">
             <h2>About the Project</h2>
@@ -69,8 +79,10 @@
         </section>
         <section id="data">
             <h2>Data</h2>
-            <p>We are using the California Fire Perimeters dataset and California Fire Hazard Severity Zone dataset, which contains information about wildfires in California.
-                Additionally, we have integrated population data from the U.S. Census Bureau and temperature data from the OpenWeather API.
+            <p>The data used for this project was sourced from the California Department of Forestry and Fire Protection (CAL FIRE) official website. 
+                The dataset includes detailed information about wildfire incidents in California, such as the start and end dates of incidents, the acres burned, 
+                the containment status, the location of incidents, and other relevant information.
+                Additionally, we have integrated population data from the U.S. Census Bureau and temperature data from Open-Meteo.
             </p>
         </section>
         <section id="results">
@@ -81,18 +93,25 @@
             </p>
             <ul>
                 <li><strong>Accuracy:</strong> 75%</li>
-                <li><strong>Precision:</strong> Short: 62%, Medium: 48%, Long: 85%</li>
-                <li><strong>Recall:</strong> Short: 57%, Medium: 44%, Long: 89%</li>
-                <li><strong>F1-Score:</strong> Short: 59%, Medium: 46%, Long: 87%</li>
+                <li><strong>Precision:</strong> Short: 61%, Medium: 41%, Long: 87%</li>
+                <li><strong>Recall:</strong> Short: 61%, Medium: 38%, Long: 89%</li>
+                <li><strong>F1-Score:</strong> Short: 61%, Medium: 39%, Long: 88%</li>
             </ul>
-            <p>The model's cross-validated accuracy is 77% with a standard deviation of 1%, indicating that the model's performance is consistent across different subsets of the data.</p>
+            <p>The model's cross-validated accuracy is 76% with a standard deviation of 2%, indicating that the model's performance is consistent across different subsets of the data.</p>
         </section>
         <section id="resources">
             <h2>Resources</h2>
-            <p>Access the California Fire Perimeters dataset <a href="https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436" target="_blank">here</a>.</p>
-            <p>Access the California Fire Hazard Severity Zone dataset <a href="https://catalog.data.gov/dataset/california-fire-hazard-severity-zone-viewer-8abb4" target="_blank">here</a>.</p>
+            <p>Access the original dataset <a href="https://www.fire.ca.gov/incidents" target="_blank">here</a>.</p>
         </section>
 
+        <section id="faq">
+            <h2>Top Three Frequently Asked Questions</h2>
+            <ol>
+                <li>What is wildfire?</li>
+                <li>What causes wildfires?</li>
+                <li>How can I prevent wildfires?</li>
+            </ol>
+        </section>
 
     <!-- Chatbot Button -->
     <button id="open-chatbot" class="chatbot-button">Chat</button>
@@ -109,6 +128,7 @@
             </div>
             <div class="chat-input-container">
                 <input type="text" id="chat-input" placeholder="Type your message...">
+                <div id="suggestions"></div>
                 <button id="send-btn">Send</button>
             </div>
         </div>
@@ -118,5 +138,13 @@
         <p>&copy; 2024 Project 4 Group 9 Members: Arman Bains, Alyssa Chand, Divya Jindal, Aram Keledjian, Sakurako Kikuchi, and Palash Raval.</p>
     </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([37.7749, -122.4194], 6); // Center map on California
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    </script>
 </body>
 </html>
