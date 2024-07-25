@@ -51,9 +51,13 @@ The project successfully meets the requirement of achieving at least 75% classif
 We strive for fairness by using representative data and evaluating the model to detect and mitigate biases. Transparency is maintained by making predictions interpretable and providing thorough documentation of the model development process. We ensure that the model runs efficiently to minimize resource usage, promoting sustainability. These measures ensure that the model remains accurate and responsible.
 
 ## Instruction
-1. Run the application: python app.py
-2. Visit the application at: http://localhost:5000
-3. Change input values and click "Predict" to get the containment time prediction.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Sarah0215/Project4_Group9.git
+2. Navigate to the project directory
+3. Run the application: python app.py
+4. Visit the application at: http://localhost:5000
+5. Change input values and click "Predict" to get the containment time prediction.
 
 ## Webpage and Chatbot
 
